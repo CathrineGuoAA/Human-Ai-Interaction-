@@ -125,8 +125,9 @@ with pages:
                     st.write(f"AI Assistant 💭: {follow_up}")
                     user_input = survey.text_input("Please specify:", key=f"Q{i}_{j}")
                     
-                    if st.button(f"Submit Answer"):
+                    if st.button(f"Submit Answer {i}_{j}"):
                         st.session_state[f"Q{i}_{j}_submitted"] = user_input  # 保存用户输入
+                        st.session_state[f"Q{i}_{j}"] = ""  # 清空文本输入框
                         st.experimental_rerun()  # 重新运行脚本以清空文本输入框
 
 if pages.current == len(questions) + 1:
