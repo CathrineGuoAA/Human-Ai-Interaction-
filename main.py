@@ -111,25 +111,28 @@ with pages:
             st.subheader(f"Question {i}: {q_info['main']}")
             options_range = 10 if i == 1 else 5  # 10-point scale for the first question, 5-point for the rest
             options = [str(num) for num in range(1, options_range + 1)]
-            
+
             survey.select_slider(
                 "Rate the statement",
-                options=options,
-                label_visibility="collapsed",
-                key=f"Q{i}",
-                on_change=update_state
+                options = options,
+                label_visibility = "collapsed",
+                key = f"Q{i}",
+                on_change = update_state
             )
 
             for j, follow_up in enumerate(q_info['follow_ups'], 1):
                 if st.session_state.get(f'show_Q{i}_{j}', False):
                     st.write(f"AI Assistant 💭: {follow_up}")
                     user_input = survey.text_input("Please specify:", key=f"Q{i}_{j}")
-                    
+                    print('*****************')
+                    print(user_input)
                     if st.button(f"Submit Answer {i}_{j}"):
                         st.session_state[f"Q{i}_{j}_submitted"] = user_input  # 保存用户输入
-                        st.session_state[f"Q{i}_{j}"] = ""  # 清空文本输入框
-                        st.experimental_rerun()  # 重新运行脚本以清空文本输入框
+                        #st.session_state.oocsi.send  #?
+                        #st.session_state[f"Q{i}_{j}"] = ""  # 清空文本输入框
+                        st.rerun()  # 重新运行脚本以清空文本输入框
 
 if pages.current == len(questions) + 1:
     st.subheader("Completion")
     st.write("Thank you for completing the survey!")
+# streamlit run main.py
