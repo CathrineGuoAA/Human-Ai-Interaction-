@@ -1,78 +1,130 @@
 import streamlit as st
 import streamlit_survey as ss
 
-st.header('📃 Welcome to feedback questionnaire')
+# Define main questions and sub-questions
+questions = {
+    1: {
+        "main": "On a scale of 1 to 10, how would you rate this course/project?",
+        "follow_ups": [
+            "What aspects of the course/project do you think need improvement?",
+            "Is there anything specific you think could be improved?",
+            "What aspects of the course/project did you find most effective?"
+        ]
+    },
+    2: {
+        "main": "The educational setup (e.g. structure, content, teaching/learning methods, level, and coherence) worked well and was suitable for this course/project. 5 Scale: Disagree to agree",
+        "follow_ups": [
+            "What aspects of the setup do you think were not suitable?",
+            "Is there any particular aspect of the setup you found lacking? Or Are there any aspects of the course's/project's structure, teamwork dynamics, or deliverables that you believe could be improved?",
+            "What aspects of the course/project did you find most effective?"
+        ]
+    },
+    3: {
+        "main": "The course/project was well organized. 5 Scale: Disagree to agree",
+        "follow_ups": [
+            "In what ways do you think the setup/organization could be improved?",
+            "Were there any specific aspects of the setup/organization that you found lacking?",
+            "What aspects of the setup/organization did you find most effective?"
+        ]
+    },
+    4: {
+        "main": "The course material was clear and motivated me to study for this course/project. 5 Scale: Disagree to agree",
+        "follow_ups": [
+            "What aspects of the material do you think were unclear or demotivating? Can you suggest any additional materials needed or emerging trends that could be included in future iterations of the course?",
+            "Were there any specific parts of the material that you found unclear? Can you provide examples of any particular materials that you found especially engaging?",
+            "What aspects of the material did you find most clear and motivating?"
+        ]
+    },
+    5: {
+        "main": "The assessment of this course/project was appropriate. 5 Scale: Disagree to agree",
+        "follow_ups": [
+            "What aspects of the assessment do you think were inappropriate?",
+            "Were there any specific aspects of the assessment that you found unclear or irrelevant?",
+            "What aspects of the assessment did you find most appropriate?"
+        ]
+    },
+    6: {
+        "main": "Overall, how would you describe the level of difficulty in this course/project? 5 Scale: Very easy to very difficult",
+        "follow_ups": [
+            "In what ways do you think the difficulty level could be increased?",
+            "Were there any specific areas where you found the difficulty level challenging or appropriate?",
+            "What aspects of the course/project challenged you a lot or you find really difficult?"
+        ]
+    },
+    7: {
+        "main": "Did the effort you applied correspond with the number of credits? 5 Scale: Much less to much more effort",
+        "follow_ups": [
+            "In what ways do you feel the effort required did not correspond with the credits?",
+            "Were there any specific aspects where you felt the effort didn't match the credits? Can you provide examples of any particular assignments, activities, or discussions that you found especially needs more time and efforts?",
+            "What aspects of the course/project made you feel that you applied more effort than the corresponded number of credits?"
+        ]
+    },
+    8: {
+        "main": "What percentage of the teaching sessions did you attend? 5 Scale: Percentage ten steps",
+        "follow_ups": [
+            "What factors influenced your attendance?",
+            "Were there any particular sessions you found more beneficial than others?",
+            "What aspects of the teaching sessions did you find most helpful?"
+        ]
+    },
+}
+
+# Initialize survey
+st.sidebar.title("Contact Info")
+st.sidebar.write("Email: s.guo3@tue.nl")
+st.title('Feedback Questionnaire')
+st.markdown('😀 Welcome to our test')
 survey = ss.StreamlitSurvey("Survey Example - Advanced Usage")
-pages = survey.pages(8, on_submit=lambda: st.success("Your responses have been recorded. Thank you!"))
+pages = survey.pages(len(questions) + 1, on_submit=lambda: st.success("Your responses have been recorded. Thank you!"))
 
+# Update state function
+def update_state():
+    question_num = pages.current
+    response_key = f"Q{question_num}"
+    response = st.session_state.get(response_key, "0")
+    
+    for j in range(1, 4):
+        st.session_state[f'show_Q{question_num}_{j}'] = False
+
+    response_int = int(response)
+
+    if question_num == 1:  # Special logic for the 10-point scale
+        if response_int <= 4:
+            st.session_state[f'show_Q{question_num}_1'] = True
+        elif 5 <= response_int <= 7:
+            st.session_state[f'show_Q{question_num}_2'] = True
+        elif response_int >= 8:
+            st.session_state[f'show_Q{question_num}_3'] = True
+    else:  # Logic for the 5-point scale
+        if response_int <= 2:
+            st.session_state[f'show_Q{question_num}_1'] = True
+        elif response_int == 3:
+            st.session_state[f'show_Q{question_num}_2'] = True
+        elif response_int >= 4:
+            st.session_state[f'show_Q{question_num}_3'] = True
+
+# Main survey loop
 with pages:
-    if pages.current == 0:
-        st.subheader("Introduction")
-        st.write("there should be some content/consent form?")
-    
-    if pages.current == 1:
-        # Initialize session states if not already present
-        if 'show_Q1_1' not in st.session_state:
-            st.session_state.show_Q1_1 = False
-        if 'show_Q1_2' not in st.session_state:
-            st.session_state.show_Q1_2 = False
-        if 'show_Q1_3' not in st.session_state:
-            st.session_state.show_Q1_3 = False
-
-        # Define a callback function to handle changes in Q1
-        def on_q1_change():
-            # Reset states whenever Q1 changes
-            st.session_state.show_Q1_1 = False
-            st.session_state.show_Q1_2 = False
-            st.session_state.show_Q1_3 = False
+    for i in range(1, len(questions) + 1):
+        if pages.current == i:
+            q_info = questions[i]
+            st.subheader(f"Question {i}: {q_info['main']}")
+            options_range = 10 if i == 1 else 5  # 10-point scale for the first question, 5-point for the rest
+            options = [str(num) for num in range(1, options_range + 1)]
             
-        # Check the response range of Q1 and update session states accordingly
-            if st.session_state.Q1 in ["1", "2", "3"]:
-                st.session_state.show_Q1_1 = True
-            elif st.session_state.Q1 in ["4", "5", "6","7"]:
-                st.session_state.show_Q1_2 = True
-            elif st.session_state.Q1 in ["8", "9", "10"]:
-                st.session_state.show_Q1_3 = True
-            
-
-        # First question with a callback to update state based on the answer
-        st.write("How satisfied are you with this survey?")
-        Q1 = survey.select_slider(
-            "Overall Satisfaction",
-            options=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-            label_visibility="collapsed",
-            key="Q1",
-            on_change=on_q1_change
-        )
-
-        # Check which follow-up question should be shown
-        if st.session_state.show_Q1_1:
-            st.write("AI Assistant 💭 Follow-up Question Q1-1: Why is your satisfaction low?")
-            Q1_1 = survey.text_input("Please specify for Q1-1:", key="Q1-1")
-
-        if st.session_state.show_Q1_2:
-            st.write("AI Assistant 💭 Follow-up Question Q1_2: Why is your satisfaction moderate?")
-            Q1_2 = survey.text_input("Please specify for Q1_2:", key="Q1_2")
-
-        if st.session_state.show_Q1_3:
-            st.write("AI Assistant 💭 Follow-up Question Q1_3: Why is your satisfaction moderate?")
-            Q1_3 = survey.text_input("Please specify for Q1_3:", key="Q1_3")
-    
-    elif pages.current == 2:
-
-    # Check which page is currently active
-        if pages.current == 2:
-            # Question 2
-            Q2 = survey.select_slider(
-                "Likert scale:",
-                options=["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-                key="Q2"
+            survey.select_slider(
+                "Rate the statement",
+                options=options,
+                label_visibility="collapsed",
+                key=f"Q{i}",
+                on_change=update_state
             )
 
-            # Conditionally display follow-up questions
-            if Q2 == "Strongly Disagree" or Q2 == "Disagree":
-                Q2_1 = survey.text_input("Follow-up for Disagree: Please specify your reasons:", key="Q2_1")
-            elif Q2 == "Neutral":
-                Q2_2 = survey.text_input("Follow-up for Neutral: Please elaborate on your neutrality:", key="Q2_2")
-            elif Q2 == "Agree" or Q2 == "Strongly Agree":
-                Q2_3 = survey.text_input("Follow-up for Agree: Why do you agree?", key="Q2_3")
+            for j, follow_up in enumerate(q_info['follow_ups'], 1):
+                if st.session_state.get(f'show_Q{i}_{j}', False):
+                    st.write(f"AI Assistant 💭: {follow_up}")
+                    survey.text_input("Please specify:", key=f"Q{i}_{j}")
+
+if pages.current == len(questions) + 1:
+    st.subheader("Completion")
+    st.write("Thank you for completing the survey!")
