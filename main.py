@@ -5,9 +5,6 @@ from Pages import questions  # Importing the questions from the questions file
 from streamlit_extras.switch_page_button import switch_page
 from oocsi_source import OOCSI
 
-# # optional; defaults to `os.environ['OPENAI_API_KEY']`
-# openai.api_key = ''
-
 # Initialize OOCSI
 if 'oocsi' not in st.session_state:
     st.session_state.oocsi = OOCSI('', 'oocsi.id.tue.nl')
