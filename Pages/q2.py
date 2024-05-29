@@ -1,7 +1,32 @@
 # Pages/q2.py
 
+import os
 import streamlit as st
+import datetime
+from datetime import datetime
 from streamlit_extras.switch_page_button import switch_page
+from oocsi_source import OOCSI
+
+# Initialize OOCSI
+if 'oocsi' not in st.session_state:
+    st.session_state.oocsi = OOCSI('', 'oocsi.id.tue.nl')
+
+
+# Record page start time function
+def record_page_start_time():
+    st.session_state['page_start_time'] = datetime.now()
+
+# Record page duration and send data via OOCSI
+def record_page_duration_and_send():
+    if 'page_start_time' in st.session_state:
+        page_duration = datetime.now() - st.session_state['page_start_time']
+        st.session_state.oocsi.send('HUMAN AI INTERACTION', {
+            "page_name": "q2",
+            "duration_seconds": page_duration.total_seconds(),
+            "participant_ID": st.session_state.name
+        })
+
+
 
 def main():
     st.title("Question 2")
@@ -23,7 +48,16 @@ def main():
         # Save the responses
         st.session_state['Q2_rating'] = rating
         st.session_state['Q2_response'] = response
+        if response:
+            st.session_state.oocsi.send('HAI_survey', {
+                    'participant_ID': st.session_state.name,
+                    'q1rating': st.session_state['Q2_rating'],
+                    'q1response': st.session_state['Q2_response'],
+                    "page_name": "q2"
+                    })
         switch_page("q3")  # Switch to the next question page
+
+
 
 if __name__ == "__main__":
     main()

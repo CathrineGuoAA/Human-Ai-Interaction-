@@ -4,6 +4,9 @@ import streamlit_survey as ss
 from Pages import questions  # Importing the questions from the questions file
 from streamlit_extras.switch_page_button import switch_page
 from oocsi_source import OOCSI
+import datetime
+from datetime import datetime
+
 
 # Initialize OOCSI
 if 'oocsi' not in st.session_state:
@@ -40,7 +43,16 @@ st.markdown('😀 Welcome to our test')
 
 
 
-# Consent form
+st.markdown('''
+    1️⃣ I have enough information about the research project from the separate information sheet. I have read it, and I have had the chance to ask questions, which have been answered to my satisfaction.
+                    
+    2️⃣ I take part in this research project voluntarily. There is no explicit or implicit pressure for me to take part in this research project, and I understand I can stop my participation at any moment without explaining why. I do not have to answer any question I do not want to answer.
+                    
+    3️⃣ I know my personal data will be collected and used for the research, as explained to me in the information sheet.
+
+    ''')
+
+    # Consent form
 OSF = st.radio
 
 st.subheader("✍️ Consent")
@@ -50,34 +62,34 @@ agree = st.radio(
 
 consent_for_osf = "yes" if OSF == 'do' else 'no'
 agree = st.radio(
-        '5️⃣ I consent to my real name being mentioned in the quotes as described under 4',
-        ('do', 'do not'), index=1)
+            '5️⃣ I consent to my real name being mentioned in the quotes as described under 4',
+            ('do', 'do not'), index=1)
 
 consent_for_osf = "yes" if OSF == 'do' else 'no'
 
-
 if 'name' not in st.session_state:
-        st.session_state['name'] = ''
+    st.session_state['name'] = ''
 
 if not st.session_state.name:
-        nameID = st.text_input("Please enter/paste here your name")
-        if nameID.strip():
-            st.session_state.name = nameID
-        else:
-            st.write("Input cannot be empty. Please try again.")
+    nameID = st.text_input("Please enter/paste here your name")
+    if nameID.strip():
+        st.session_state.name = nameID
+    else:
+        st.write("Input cannot be empty. Please try again.")
 
-# Display final output if both inputs are provided
-if agree == "do":
+
+if st.session_state.name:
+    st.write(f"Hello, {st.session_state.name}!")
+
+    if agree == "do":
         st.write('Thank you! Please continue to the next page to start the experiment')
-
         if st.button("Next page"):
-                        st.session_state.oocsi.send('HAI_consent', {
+            st.session_state.oocsi.send('HAI_CONSENT', {
                 'participant_ID': st.session_state.name,
-                'expert': "yes",
-                'consent': 'no',
+                'consent': 'yes',
                 'consentForOSF': consent_for_osf
             })
-        switch_page("q1")
+            switch_page("q1")
 else:
         if st.button("Next page"):
             switch_page('https://www.pinterest.com/')
