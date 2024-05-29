@@ -1,15 +1,39 @@
 import streamlit as st
 import os
-from openai import OpenAI
 import streamlit_survey as ss
 from Pages import questions  # Importing the questions from the questions file
 from streamlit_extras.switch_page_button import switch_page
-# from oocsi_source import OOCSI
+from oocsi_source import OOCSI
 
-# optional; defaults to `os.environ['OPENAI_API_KEY']`
-openai.api_key = 'sk-proj-ljbeeer2OFS55YaPQPSRT3BlbkFJGRrPlF5gchcjYfaNqfbN'
+# # optional; defaults to `os.environ['OPENAI_API_KEY']`
+# openai.api_key = ''
 
-            
+# Initialize OOCSI
+if 'oocsi' not in st.session_state:
+    st.session_state.oocsi = OOCSI('', 'oocsi.id.tue.nl')
+
+
+# Record start time for each page
+def record_page_start_time():
+    global page_start_time
+    page_start_time = datetime.now()
+
+# Record page duration and send data via OOCSI
+def record_page_duration_and_send():
+    current_page_title = st.session_state.current_page_title
+    if page_start_time:
+        page_end_time = datetime.now()
+        page_duration = page_end_time - page_start_time
+        st.write(f"Time spent on {current_page_title}: {page_duration}")
+
+        # Send data to Data Foundry via OOCSI
+        data = {
+            "page_name": current_page_title,
+            "duration_seconds": page_duration.total_seconds(),
+            'participant_ID': st.session_state.participantID
+        }
+        st.session_state.oocsi.send('HAI_consent', data)
+
 
 # Initialize survey
 st.sidebar.title("Contact Info")
@@ -50,7 +74,13 @@ if agree == "do":
         st.write('Thank you! Please continue to the next page to start the experiment')
 
         if st.button("Next page"):
-            switch_page("q1")
+                        st.session_state.oocsi.send('HAI_consent', {
+                'participant_ID': st.session_state.name,
+                'expert': "yes",
+                'consent': 'no',
+                'consentForOSF': consent_for_osf
+            })
+        switch_page("q1")
 else:
         if st.button("Next page"):
             switch_page('https://www.pinterest.com/')

@@ -33,10 +33,10 @@ def main():
     st.write(follow_up)
     response = st.text_input("Your answer", key="Q1_follow_up")
     
-    if response:
-        generated_question = generate_follow_up_question(response)
-        st.write("GPT Assistant 💭: " + generated_question)
-        extra_response = st.text_input("Your answer to GPT's follow-up question", key="Q1_extra_follow_up")
+    # if response:
+    #     generated_question = generate_follow_up_question(response)
+    #     st.write("GPT Assistant 💭: " + generated_question)
+    #     extra_response = st.text_input("Your answer to GPT's follow-up question", key="Q1_extra_follow_up")
 
 # if 'bot_prompt' not in st.session_state:
 #     st.session_state.bot_prompt = []
