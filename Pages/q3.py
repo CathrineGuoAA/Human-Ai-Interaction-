@@ -17,13 +17,13 @@ def main():
         follow_up = "What aspects of the setup/organization did you find most effective?"
     
     st.write(follow_up)
-    response = st.text_input("Your answer", key="Q2_follow_up")
+    response = st.text_input("Your answer", key="Q3_follow_up")
     
     if st.button("Next"):
         # Save the responses
-        st.session_state['Q2_rating'] = rating
-        st.session_state['Q2_response'] = response
-        switch_page("q3")  # Switch to the next question page
+        st.session_state['Q3_rating'] = rating
+        st.session_state['Q3_response'] = response
+        switch_page("q4")  # Switch to the next question page
 
 if __name__ == "__main__":
     main()

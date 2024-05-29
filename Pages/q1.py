@@ -4,18 +4,18 @@ import os
 
 import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
-import openai
+# import openai
 
-# optional; defaults to `os.environ['OPENAI_API_KEY']`
-openai.api_key = '...'
+# # optional; defaults to `os.environ['OPENAI_API_KEY']`
+# openai.api_key = '...'
 
 
-# Save init prompt in the bot_prompt.
-if len(st.session_state.bot_prompt) == 0:
-    pr: list = prompt.split('\n')
-    pr = [p for p in pr if len(p)]  # remove empty string
-    st.session_state.bot_prompt = pr
-    # print(f'init: {st.session_state.bot_prompt}')
+# # Save init prompt in the bot_prompt.
+# if len(st.session_state.bot_prompt) == 0:
+#     pr: list = prompt.split('\n')
+#     pr = [p for p in pr if len(p)]  # remove empty string
+#     st.session_state.bot_prompt = pr
+#     # print(f'init: {st.session_state.bot_prompt}')
 
 def main():
     st.title("Question 1")
@@ -38,26 +38,26 @@ def main():
         st.write("GPT Assistant 💭: " + generated_question)
         extra_response = st.text_input("Your answer to GPT's follow-up question", key="Q1_extra_follow_up")
 
-if 'bot_prompt' not in st.session_state:
-    st.session_state.bot_prompt = []
+# if 'bot_prompt' not in st.session_state:
+#     st.session_state.bot_prompt = []
 
-if user_input:
-    # Add the user input to the bot_prompt before sending the prompt.
-    st.session_state.bot_prompt.append(f'You: {user_input}')
+# if user_input:
+#     # Add the user input to the bot_prompt before sending the prompt.
+#     st.session_state.bot_prompt.append(f'You: {user_input}')
 
-    # Convert a list of prompts to a string for the GPT bot.
-    input_prompt: str = '\n'.join(st.session_state.bot_prompt)
-    # print(f'bot prompt input list:\n{st.session_state.bot_prompt}')
-    # print(f'bot prompt input string:\n{input_prompt}')
+#     # Convert a list of prompts to a string for the GPT bot.
+#     input_prompt: str = '\n'.join(st.session_state.bot_prompt)
+#     # print(f'bot prompt input list:\n{st.session_state.bot_prompt}')
+#     # print(f'bot prompt input string:\n{input_prompt}')
 
-    output = chatbot_response(input_prompt)
-    # print(prompt)
-    # store the output 
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
+#     output = chatbot_response(input_prompt)
+#     # print(prompt)
+#     # store the output 
+#     st.session_state.past.append(user_input)
+#     st.session_state.generated.append(output)
 
-    # Add bot response for next prompt.
-    st.session_state.bot_prompt.append(f'Friend: {output}')
+#     # Add bot response for next prompt.
+#     st.session_state.bot_prompt.append(f'Friend: {output}')
     
     if st.button("Next"):
         # Save the responses
