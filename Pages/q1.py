@@ -73,8 +73,6 @@ def main():
         switch_page("q2")  # Switch to the next question page
 
 
-                   
-                
 
 if __name__ == "__main__":
     main()
