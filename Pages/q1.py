@@ -39,7 +39,7 @@ def main():
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = " 🤖💬: What aspects of the course/project do you think need improvement?"
+        follow_up = st.write(" 🤖💬: :blue-background[What aspects of the course/project do you think need improvement?]")
     elif 5 <= rating <= 7:
         with st.spinner('Wait for it...'):
             time.sleep(1)
@@ -65,9 +65,9 @@ def main():
         if response:
             st.session_state.oocsi.send ('HAI_survey', {
                     'participant_ID': st.session_state.name,
-                    'q1rating': st.session_state['Q1_rating'],
-                    'q1response': st.session_state['Q1_response'],
-                    'q1followup': st.session_state['Q1_followup'],
+                    'rating': st.session_state['Q1_rating'],
+                    'response': st.session_state['Q1_response'],
+                    'followup': st.session_state['Q1_followup'],
                     "page_name": "q1"
                     })
         switch_page("q2")  # Switch to the next question page

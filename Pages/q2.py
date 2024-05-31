@@ -6,6 +6,7 @@ import datetime
 from datetime import datetime
 from streamlit_extras.switch_page_button import switch_page
 from oocsi_source import OOCSI
+import time
 
 # Initialize OOCSI
 if 'oocsi' not in st.session_state:
@@ -35,11 +36,23 @@ def main():
     rating = st.slider("Rate the statement", 1, 5, key="Q2")
 
     if rating <= 2:
-        follow_up = "What aspects of the setup do you think were not suitable?"
+        with st.spinner('Wait for it...'):
+            time.sleep(1)
+            st.success('Done!')
+        time.sleep(1)  # Wait 1 seconds
+        follow_up = "🤖💬: What aspects of the setup do you think were not suitable?"
     elif rating == 3:
-        follow_up = "Is there any particular aspect of the setup you found lacking?"
+        with st.spinner('Wait for it...'):
+            time.sleep(1)
+            st.success('Done!')
+        time.sleep(1)  # Wait 1 seconds
+        follow_up = "🤖💬: Is there any particular aspect of the setup you found lacking?"
     else:
-        follow_up = "What aspects of the course/project did you find most effective?"
+        with st.spinner('Wait for it...'):
+            time.sleep(1)
+            st.success('Done!')
+        time.sleep(1)  # Wait 1 seconds
+        follow_up = "🤖💬: What aspects of the course/project did you find most effective?"
     
     st.write(follow_up)
     response = st.text_input("Your answer", key="Q2_follow_up")
@@ -48,11 +61,14 @@ def main():
         # Save the responses
         st.session_state['Q2_rating'] = rating
         st.session_state['Q2_response'] = response
+        st.session_state['Q2_followup'] = follow_up
+        
         if response:
             st.session_state.oocsi.send('HAI_survey', {
                     'participant_ID': st.session_state.name,
-                    'q1rating': st.session_state['Q2_rating'],
-                    'q1response': st.session_state['Q2_response'],
+                    'rating': st.session_state['Q2_rating'],
+                    'response': st.session_state['Q2_response'],
+                    'followup': st.session_state['Q2_followup'],
                     "page_name": "q2"
                     })
         switch_page("q3")  # Switch to the next question page

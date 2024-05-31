@@ -1,5 +1,4 @@
-# Pages/q3.py
-
+# Pages/q2.py
 
 import os
 import streamlit as st
@@ -23,54 +22,56 @@ def record_page_duration_and_send():
     if 'page_start_time' in st.session_state:
         page_duration = datetime.now() - st.session_state['page_start_time']
         st.session_state.oocsi.send('HUMAN AI INTERACTION', {
-            "page_name": "q4",
+            "page_name": "q6",
             "duration_seconds": page_duration.total_seconds(),
             "participant_ID": st.session_state.name
         })
 
+
+
 def main():
-    st.title("Question 4")
+    st.title("Question 6")
     
-    st.subheader("The course/project was well organized. 5 Scale: Disagree to agree")
-    rating = st.slider("Rate the statement", 1, 5, key="Q4")
+    st.subheader("The educational setup (e.g. structure, content, teaching/learning methods, level, and coherence) worked well and was suitable for this course/project. 5 Scale: Disagree to agree")
+    rating = st.slider("Rate the statement", 1, 5, key="Q1")
 
     if rating <= 2:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What aspects of the material do you think were unclear or demotivating? Can you suggest any additional materials needed or emerging trends that could be included in future iterations of the course?"
+        follow_up = "🤖💬: In what ways do you think the difficulty level could be increased?"
     elif rating == 3:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬:  Were there any specific parts of the material that you found unclear? Can you provide examples of any particular materials that you found especially engaging?"
+        follow_up = "🤖💬: Were there any specific areas where you found the difficulty level challenging or appropriate?"
     else:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What aspects of the material did you find most clear and motivating?"
+        follow_up = "🤖💬: What aspects of the course/project challenged you a lot or you find really difficult ?"
     
-        st.write(follow_up)
-    response = st.text_input("Your answer", key="Q4_follow_up")
+    st.write(follow_up)
+    response = st.text_input("Your answer", key="Q6_follow_up")
     
     if st.button("Next"):
         # Save the responses
-        st.session_state['Q4_rating'] = rating
-        st.session_state['Q4_response'] = response
-        st.session_state['Q4_followup'] = follow_up
-
+        st.session_state['Q6_rating'] = rating
+        st.session_state['Q6_response'] = response
         if response:
             st.session_state.oocsi.send('HAI_survey', {
                     'participant_ID': st.session_state.name,
-                    'rating': st.session_state['Q4_rating'],
-                    'response': st.session_state['Q4_response'],
-                    'followup': st.session_state['Q4_followup'],
-                    "page_name": "q4"
+                    'rating': st.session_state['Q6_rating'],
+                    'response': st.session_state['Q6_response'],
+                    'followup': st.session_state['Q6_followup'],
+                    "page_name": "q6"
                     })
-        switch_page("q5")  # Switch to the next question page
-        
+        switch_page("q7")  # Switch to the next question page
+
+
+
 if __name__ == "__main__":
     main()
