@@ -1,4 +1,4 @@
-# Pages/q2.py
+# Pages/q6.py
 
 import os
 import streamlit as st
