@@ -33,7 +33,7 @@ def main():
     st.title("Question 6")
     
     st.subheader("The educational setup (e.g. structure, content, teaching/learning methods, level, and coherence) worked well and was suitable for this course/project. 5 Scale: Disagree to agree")
-    rating = st.slider("Rate the statement", 1, 5, key="Q1")
+    rating = st.slider("Rate the statement", 1, 5, key="Q6")
 
     if rating <= 2:
         with st.spinner('Wait for it...'):
@@ -61,6 +61,8 @@ def main():
         # Save the responses
         st.session_state['Q6_rating'] = rating
         st.session_state['Q6_response'] = response
+        st.session_state['Q6_followup'] = follow_up
+
         if response:
             st.session_state.oocsi.send('HAI_survey', {
                     'participant_ID': st.session_state.name,

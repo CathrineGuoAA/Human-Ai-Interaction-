@@ -55,12 +55,14 @@ def main():
         follow_up = "🤖💬: What aspects of the course/project made you feel that you applied more effort than the corresponded number of credits?"
     
     st.write(follow_up)
-    response = st.text_input("Your answer", key="Q6_follow_up")
+    response = st.text_input("Your answer", key="Q7_follow_up")
     
     if st.button("Next"):
         # Save the responses
         st.session_state['Q7_rating'] = rating
         st.session_state['Q7_response'] = response
+        st.session_state['Q7_followup'] = follow_up
+
         if response:
             st.session_state.oocsi.send('HAI_survey', {
                     'participant_ID': st.session_state.name,

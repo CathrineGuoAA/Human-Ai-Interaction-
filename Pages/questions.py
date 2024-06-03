@@ -20,7 +20,7 @@ questions = {
         "main": "The course/project was well organized. 5 Scale: Disagree to agree",
         "follow_ups": [
             "In what ways do you think the setup/organization could be improved?",
-            "In what ways do you think the setup/organization could be improved?",
+            "Were there any specific aspects of the setup/organization that you found lacking?",
             "What aspects of the setup/organization did you find most effective?"
         ]
     },
