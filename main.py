@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from Pages import questions  # Importing the questions from the questions file
-import streamlit_extras
+
 from streamlit_extras.switch_page_button import switch_page
 from oocsi_source import OOCSI
 import datetime
