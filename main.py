@@ -72,6 +72,8 @@ if 'name' not in st.session_state:
 
 if not st.session_state.name:
     nameID = st.text_input("Please enter/paste here your name")
+
+    
     if nameID.strip():
         st.session_state.name = nameID
     else:
@@ -90,6 +92,6 @@ if st.session_state.name:
                 'consentForOSF': consent_for_osf
             })
             switch_page("q1")
-else:
+    else:
         if st.button("Next page"):
             switch_page('https://www.pinterest.com/')

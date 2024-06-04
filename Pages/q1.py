@@ -28,6 +28,12 @@ def record_page_duration_and_send():
         })
 
 
+def check_input_length(text):
+    words = text.split()
+    word_count = len(words)
+    return word_count
+
+
 def main():
     st.title("Question 1")
     
@@ -56,10 +62,17 @@ def main():
     st.write(follow_up)
     response = st.text_input("Your answer", key="Q1_follow_up")
     
+    word_count = check_input_length(follow_up)
+    
     if st.button("Next"):
         # Save the responses
         st.session_state['Q1_rating'] = rating
-        st.session_state['Q1_response'] = response
+
+        if response.strip():
+            st.session_state['Q1_response'] = response
+        else:
+            st.write("Input cannot be empty. Please try again.")
+
         st.session_state['Q1_followup'] = follow_up
     
         if response:
