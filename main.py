@@ -5,7 +5,7 @@ from streamlit_extras.switch_page_button import switch_page
 from oocsi_source import OOCSI
 import datetime
 from datetime import datetime
-import Pages
+import pages
 
 
 # Initialize OOCSI
@@ -91,7 +91,7 @@ if st.session_state.name:
                 'consent': 'yes',
                 'consentForOSF': consent_for_osf
             })
-            switch_page("page_q1")
+            switch_page("q1")
     else:
         if st.button("Next page"):
             switch_page('https://www.pinterest.com/')
