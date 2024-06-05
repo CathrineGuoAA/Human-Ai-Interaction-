@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from Pages import questions  # Importing the questions from the questions file
+from pages import questions  # Importing the questions from the questions file
 from streamlit_extras.switch_page_button import switch_page
 from oocsi_source import OOCSI
 import datetime
