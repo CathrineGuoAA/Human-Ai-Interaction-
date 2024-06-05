@@ -28,10 +28,10 @@ def record_page_duration_and_send():
         })
 
 
-def check_input_length(text):
-    words = text.split()
-    word_count = len(words)
-    return word_count
+# def check_input_length(text):
+#     words = text.split()
+#     word_count = len(words)
+#     return word_count
 
 
 def main():
@@ -62,7 +62,7 @@ def main():
     st.write(follow_up)
     response = st.text_input("Your answer", key="Q1_follow_up")
     
-    word_count = check_input_length(follow_up)
+    # word_count = check_input_length(follow_up)
     
     if st.button("Next"):
         # Save the responses
