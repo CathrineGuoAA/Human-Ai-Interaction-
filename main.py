@@ -91,7 +91,7 @@ if st.session_state.name:
                 'consent': 'yes',
                 'consentForOSF': consent_for_osf
             })
-            switch_page("q1")
+            switch_page("page_q1")
     else:
         if st.button("Next page"):
             switch_page('https://www.pinterest.com/')
