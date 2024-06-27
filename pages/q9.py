@@ -32,8 +32,7 @@ def record_page_duration_and_send():
 
 def main():
     st.title("Question 9")
-    rating = st.slider("How would you rate the lecturers overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions?
-5 Scale: Poor to excellent")
+    rating = st.slider("How would you rate the lecturers overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions? 5 Scale: Poor to excellent")
 
     if rating <= 2:
         with st.spinner('Wait for it...'):
