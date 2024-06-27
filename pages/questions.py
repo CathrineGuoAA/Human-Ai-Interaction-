@@ -13,7 +13,7 @@ questions = {
         "follow_ups": [
             "What aspects of the setup do you think were not suitable?",
             "Is there any particular aspect of the setup you found lacking? Or Are there any aspects of the course's/project's structure, teamwork dynamics, or deliverables that you believe could be improved?",
-            "What aspects of the course/project did you find most effective?"
+            " What aspects of the setup did you find most beneficial?"
         ]
     },
     3: {
@@ -64,4 +64,10 @@ questions = {
             "What aspects of the teaching sessions did you find most helpful?"
         ]
     },
+    9: {
+        "main": "WHow would you rate the lecturers' overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions? 5 Scale: Poor to excellent",
+        "follow_ups": [
+            "What aspects of the lecturer(s)' presentation style or engagement with students do you think could be improved?",
+            "Were there any specific instances where you felt the lecturer(s) could have been more effective in activating and engaging students or more approachable?",
+            "Can you recall any instances where the lecturer(s) excelled in activating and engaging students?"
 }
