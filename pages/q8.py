@@ -33,13 +33,13 @@ def main():
     st.title("Question 8")
     rating = st.slider("What percentage of the teaching sessions did you attend?", 0, 100, step=10)
 
-    if rating <= 2:
+    if rating < 50:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
         follow_up = "🤖💬: What factors influenced your attendance?"
-    elif rating == 3:
+    elif 50<= rating <= 75:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
