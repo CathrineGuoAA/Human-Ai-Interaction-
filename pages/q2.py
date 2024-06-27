@@ -52,7 +52,7 @@ def main():
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What aspects of the course/project did you find most effective?"
+        follow_up = "🤖💬:  What aspects of the setup did you find most beneficial?"
     
     st.write(follow_up)
     response = st.text_input("Your answer", key="Q2_follow_up")
