@@ -65,7 +65,7 @@ questions = {
         ]
     },
     9: {
-        "main": "WHow would you rate the lecturers' overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions? 5 Scale: Poor to excellent",
+        "main": "How would you rate the lecturers' overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions? 5 Scale: Poor to excellent",
         "follow_ups": [
             "What aspects of the lecturer(s)' presentation style or engagement with students do you think could be improved?",
             "Were there any specific instances where you felt the lecturer(s) could have been more effective in activating and engaging students or more approachable?",
