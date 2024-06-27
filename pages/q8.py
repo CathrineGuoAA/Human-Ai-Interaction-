@@ -69,7 +69,7 @@ def main():
                     'followup': st.session_state['Q8_followup'],
                     "page_name": "q8"
                     })
-        switch_page("thankyou")  # Switch to the next question page
+        switch_page("q9")  # Switch to the next question page
 
 
 
