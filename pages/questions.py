@@ -57,7 +57,7 @@ questions = {
         ]
     },
     8: {
-        "main": "What percentage of the teaching sessions did you attend? 5 Scale: Percentage ten steps",
+        "main": "What percentage of the teaching sessions did you attend?",
         "follow_ups": [
             "What factors influenced your attendance?",
             "Were there any particular sessions you found more beneficial than others?",
