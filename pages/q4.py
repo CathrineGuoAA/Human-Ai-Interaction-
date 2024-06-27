@@ -31,7 +31,7 @@ def record_page_duration_and_send():
 def main():
     st.title("Question 4")
     
-    st.subheader("The course/project was well organized. 5 Scale: Disagree to agree")
+    st.subheader("The course material was clear and motivated me to study for this course/project. 5 Scale: Disagree to agree")
     rating = st.slider("Rate the statement", 1, 5, key="Q4")
 
     if rating <= 2:
