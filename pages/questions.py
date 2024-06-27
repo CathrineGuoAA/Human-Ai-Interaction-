@@ -71,5 +71,5 @@ questions = {
             "Were there any specific instances where you felt the lecturer(s) could have been more effective in activating and engaging students or more approachable?",
             "Can you recall any instances where the lecturer(s) excelled in activating and engaging students?"
         ]
-    }
+    },
 }
