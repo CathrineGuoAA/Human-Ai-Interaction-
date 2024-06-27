@@ -23,7 +23,7 @@ def record_page_duration_and_send():
     if 'page_start_time' in st.session_state:
         page_duration = datetime.now() - st.session_state['page_start_time']
         st.session_state.oocsi.send('HUMAN AI INTERACTION', {
-            "page_name": "q8",
+            "page_name": "q9",
             "duration_seconds": page_duration.total_seconds(),
             "participant_ID": st.session_state.name
         })
@@ -32,7 +32,7 @@ def record_page_duration_and_send():
 
 def main():
     st.title("Question 9")
-    rating = st.slider("How would you rate the lecturers' overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions?
+    rating = st.slider("How would you rate the lecturers overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions?
 5 Scale: Poor to excellent")
 
     if rating <= 2:
