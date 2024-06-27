@@ -31,7 +31,7 @@ def record_page_duration_and_send():
 
 def main():
     st.title("Question 8")
-    rating = st.slider("What percentage of the teaching sessions did you attend?", 0, 100, step=10)
+    rating = st.slider("What percentage of the teaching sessions did you attend?", 0, 100, step=5)
 
     if rating < 50:
         with st.spinner('Wait for it...'):
