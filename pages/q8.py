@@ -28,18 +28,17 @@ def record_page_duration_and_send():
         })
 
 
-
 def main():
     st.title("Question 8")
     rating = st.slider("What percentage of the teaching sessions did you attend?", 0, 100, step=10)
 
-    if rating <= 2:
+    if rating < 50:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
         follow_up = "🤖💬: What factors influenced your attendance?"
-    elif rating == 3:
+    elif 50 <= rating <= 75:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
@@ -50,10 +49,11 @@ def main():
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What aspects of the teaching sessions did you find most helpful"
+        follow_up = "🤖💬: What aspects of the teaching sessions did you find most helpful?"
 
-        st.write(follow_up)
-        response = st.text_input("Your answer", key="Q8_follow_up")
+    st.write(follow_up)
+    response = st.text_input("Your answer", key="Q8_follow_up")
+
         
     if st.button("Next"):
         # Save the responses

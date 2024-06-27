@@ -34,6 +34,13 @@ def main():
     st.subheader("The course/project was well organized. 5 Scale: Disagree to agree")
     rating = st.slider("Rate the statement", 1, 5, key="Q3")
 
+    # if rating <= 2:
+    #     with st.spinner('Wait for it...'):
+    #         time.sleep(1)
+    #         st.success('Done!')
+    #     time.sleep(1)  # Wait 1 seconds
+    #     follow_up = "🤖💬: What aspects of the setup do you think were not suitable?"
+
     if rating <= 2:
         with st.spinner('Wait for it...'):
             time.sleep(1)
@@ -53,7 +60,7 @@ def main():
         time.sleep(1)  # Wait 1 seconds
         follow_up = "🤖💬: What aspects of the setup/organization did you find most effective?"
     
-        st.write(follow_up)
+    st.write(follow_up)
     response = st.text_input("Your answer", key="Q3_follow_up")
     
     if st.button("Next"):

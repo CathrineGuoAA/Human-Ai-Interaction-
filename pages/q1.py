@@ -45,19 +45,19 @@ def main():
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = st.write(" 🤖💬: :blue-background[What aspects of the course/project do you think need improvement?]")
+        follow_up = " 🤖💬: What aspects of the course/project do you think need improvement? What did you like about this course?"
     elif 5 <= rating <= 7:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: Is there anything specific you think could be improved?"
+        follow_up = "🤖💬: Is there anything specific you think could be improved? For example are there any specific aspects of the curriculum, teaching methods, or resources that you feel could be enhanced?"
     else:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What aspects of the course/project did you find most effective?"
+        follow_up = "🤖💬: What aspects of the course/project did you find most effective? Can you provide examples of any particular assignments, activities, or discussions that you found especially engaging?"
     
     st.write(follow_up)
     response = st.text_input("Your answer", key="Q1_follow_up")

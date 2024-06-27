@@ -32,7 +32,7 @@ def record_page_duration_and_send():
 def main():
     st.title("Question 6")
     
-    st.subheader("The educational setup (e.g. structure, content, teaching/learning methods, level, and coherence) worked well and was suitable for this course/project. 5 Scale: Disagree to agree")
+    st.subheader("Overall, how would you describe the level of difficulty in this course/project? 5 Scale: Very easy to very difficult")
     rating = st.slider("Rate the statement", 1, 5, key="Q6")
 
     if rating <= 2:

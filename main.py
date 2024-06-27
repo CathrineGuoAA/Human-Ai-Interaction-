@@ -41,6 +41,61 @@ st.title('Feedback Questionnaire')
 st.markdown('😀 Welcome to our test')
 
 
+st.subheader("Informed Consent Form")
+
+st.subheader("Introduction")
+st.write("You are invited to participate in the research project. Participation is voluntary. Please read the following information carefully.")
+
+st.subheader("Purpose of the Research")
+st.write("""
+The research is managed by EngD trainees. The goals are:
+- Create engaging feedback forms.
+- Improve course quality and student experience.
+- Address shortcomings of conventional feedback systems.
+""")
+
+st.subheader("Controller (GDPR)")
+st.write("Technische Universiteit Eindhoven (TU/e) is responsible for processing your personal data.")
+
+st.subheader("Research Participation Details")
+st.write("""
+- Takes place once on the TU/e campus.
+- Fill out two online feedback forms and two questionnaires.
+- Observations and a semi-structured interview will be conducted.
+- Total participation time: 40 minutes.
+- Compensation: 5 euros.
+""")
+
+st.subheader("Potential Risks and Inconveniences")
+st.write("No physical, legal, or economic risks. Participation is voluntary, and you can withdraw at any time without consequences.")
+
+st.subheader("Personal Data Processing")
+st.write("No personal data will be processed. All data will be stored securely and anonymized.")
+
+st.subheader("Confidentiality and Data Use")
+st.write("Your privacy will be protected. Data will be stored securely and deleted after transcription. No personal identifiers will be used in publications without explicit consent.")
+
+st.subheader("Withdrawing Consent and Contact")
+st.write("""
+You can withdraw from the research at any time without losing compensation. For questions or to withdraw, contact Dr. Chao Zhang at c.zhang.5@tue.nl.
+""")
+
+st.subheader("Legal Basis")
+st.write("The legal basis for data processing is your consent. The project is approved by the ethical review committee of the HTI group of TU/e.")
+
+st.header("Consent Form")
+
+st.write("By signing this consent form, you acknowledge the following:")
+st.write("""
+1. You are informed about the research project and have had the opportunity to ask questions.
+2. Participation is voluntary, and you can withdraw at any time without giving a reason.
+3. Consent to process personal data as described.
+4. Consent to use your answers in research publications without your name.
+""")
+
+st.write("**Certificate of Consent**")
+
+
 
 st.markdown('''
     1️⃣ I have enough information about the research project from the separate information sheet. I have read it, and I have had the chance to ask questions, which have been answered to my satisfaction.
@@ -61,7 +116,7 @@ agree = st.radio(
 
 consent_for_osf = "yes" if OSF == 'do' else 'no'
 agree = st.radio(
-            '5️⃣ I consent to my real name being mentioned in the quotes as described under 4',
+            '5️⃣ I consent to participate in this study',
             ('do', 'do not'), index=1)
 
 consent_for_osf = "yes" if OSF == 'do' else 'no'

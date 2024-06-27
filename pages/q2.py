@@ -46,7 +46,7 @@ def main():
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: Is there any particular aspect of the setup you found lacking?"
+        follow_up = "🤖💬: Is there any particular aspect of the setup you found lacking? Or Are there any aspects of the course's/project's structure, teamwork dynamics, or deliverables that you believe could be improved?"
     else:
         with st.spinner('Wait for it...'):
             time.sleep(1)
