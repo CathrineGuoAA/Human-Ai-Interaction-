@@ -1,4 +1,4 @@
-# Pages/q8.py
+# Pages/q9.py
 
 import os
 import streamlit as st
@@ -29,48 +29,47 @@ def record_page_duration_and_send():
 
 
 def main():
-    st.title("Question 8")
-    st.subheader("What percentage of the teaching sessions did you atten")
-    rating = st.slider("Rate the statement", 0, 100, step=10)
+    st.title("Question 9")
+    st.subheader("How would you rate the lecturers' overall effectiveness in presenting the content, engaging students, and being approachable and open to  questions? 5 Scale: Poor to excellent")
+    rating = st.slider("Rate the statement", 1, 5, key="Q9")
 
-    if rating < 50:
+    if rating <= 2:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What factors influenced your attendance?"
-    elif 50 <= rating <= 75:
+        follow_up = "🤖💬: What aspects of the lecturer(s)' presentation style or engagement with students do you think could be improved?"
+    elif rating == 3:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: Were there any particular sessions you found more beneficial than others?"
+        follow_up = "🤖💬: Were there any specific instances where you felt the lecturer(s) could have been more effective in activating and engaging students or more approachable?"
     else:
         with st.spinner('Wait for it...'):
             time.sleep(1)
             st.success('Done!')
         time.sleep(1)  # Wait 1 seconds
-        follow_up = "🤖💬: What aspects of the teaching sessions did you find most helpful?"
-
+        follow_up = "🤖💬: Can you recall any instances where the lecturer(s) excelled in activating and engaging students?"
+    
     st.write(follow_up)
-    response = st.text_input("Your answer", key="Q8_follow_up")
-
+    response = st.text_input("Your answer", key="Q7_follow_up")
         
     if st.button("Next"):
         # Save the responses
-        st.session_state['Q8_rating'] = rating
-        st.session_state['Q8_response'] = response
-        st.session_state['Q8_followup'] = follow_up
+        st.session_state['Q9_rating'] = rating
+        st.session_state['Q9_response'] = response
+        st.session_state['Q9_followup'] = follow_up
 
         if response:
             st.session_state.oocsi.send('HAI_survey', {
                     'participant_ID': st.session_state.name,
-                    'rating': st.session_state['Q8_rating'],
-                    'response': st.session_state['Q8_response'],
-                    'followup': st.session_state['Q8_followup'],
-                    "page_name": "q8"
+                    'rating': st.session_state['Q9_rating'],
+                    'response': st.session_state['Q9_response'],
+                    'followup': st.session_state['Q9_followup'],
+                    "page_name": "q9"
                     })
-        switch_page("q9")  # Switch to the next question page
+        switch_page("thankyou")  # Switch to the next question page
 
 
 
